@@ -1,0 +1,71 @@
+extends layout
+
+block main
+  .container
+    .row.align-items-center
+      .col-md-6.col-sm-8
+        form(action="/", method="POST")
+          .form-group
+            label(for='contract') Введите номер договора
+            input#contract.form-control(name="id", type='text', placeholder='Введите номер договора')
+          button.btn.btn-primary(type='submit') Отправить
+
+
+    if calls
+      .row
+        .col(style={"margin-bottom": 15})
+          table.table.table-dark
+            caption Звонки абонента у которых более 2 тегов
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') Время
+            tbody
+              each i in calls
+                tr
+                  th(scope='row')= i.id
+                  td= i.datetime
+
+    if subscriber
+      .row
+        .col-sm-4(style={"margin-bottom": 15})
+          table.table.table-dark
+            caption Абоненты
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') Имя
+                th(scope='col') Фамилия
+            tbody
+              each i in subscriber
+                tr
+                  th(scope='row')= i.id
+                  td= i.firstname
+                  td= i.lastname
+        .col-sm-4(style={"margin-bottom": 15})
+          table.table.table-dark
+            caption Звонки
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') № договора
+                th(scope='col') Время
+            tbody
+              each i in call
+                tr
+                  th(scope='row')= i.id
+                  td= i.id_contract
+                  td= i.datetime
+        .col-sm-4(style={"margin-bottom": 15})
+          table.table.table-dark
+            caption Тэги
+            thead
+              tr
+                th(scope='col') #
+                th(scope='col') Заголовок
+            tbody
+              each i in tag
+                tr
+                  th(scope='row')= i.id
+                  td= i.title
+
